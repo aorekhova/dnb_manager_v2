@@ -1,0 +1,21 @@
+REPORTS_ROOT = r"C:/reports"
+
+APS_REPORTS_ROOT = f"{REPORTS_ROOT}/APS"
+APS_SOURCES = f"{APS_REPORTS_ROOT}/sources"
+APS_REPORTS = f"{APS_REPORTS_ROOT}/reports"
+APS_SELECTED_PARTIES = f"{APS_REPORTS_ROOT}/selected_parties"
+APS_MATCHED_FILES = f"{APS_REPORTS_ROOT}/match_result"
+
+TEN_REPORTS_ROOT = f"{REPORTS_ROOT}/TeN"
+TEN_SOURCES = f"{TEN_REPORTS_ROOT}/sources"
+TEN_REPORTS = f"{TEN_REPORTS_ROOT}/reports"
+TEN_SELECTED_PARTIES = f"{TEN_REPORTS_ROOT}/selected_parties"
+TEN_MATCHED_FILES = f"{TEN_REPORTS_ROOT}/match_result"
+
+COUNTRY_MAP = f"{REPORTS_ROOT}/country_map"
+DNB_DATABASE = f"{REPORTS_ROOT}/dnb_database"
+
+REPORT_OUTPUT = f"{REPORTS_ROOT}/reports"
+
+PAYMENT_REPORTS = f"{REPORTS_ROOT}/payment_reports/output"
+PAYMENT_SOURCES = f"{REPORTS_ROOT}/payment_reports/source"
