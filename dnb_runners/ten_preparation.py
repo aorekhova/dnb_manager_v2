@@ -9,8 +9,8 @@ class TenPreparation:
         self.input_path = f"{roots.TEN_SOURCES}/{task_name}"
         self.output_path = f"{roots.TEN_SOURCES}/{task_name}"
 
-        self.convert_xls_to_csv = ["python", "-m", "drum_and_bass.convert_xls_to_csv", "-i", self.input_path]
-        self.split_ten_invoices_per_week = ["python", "-m", "drum_and_bass.split_ten_invoices_per_week", "-i",
+        self.convert_xls_to_csv = ["python", "-u", "-m", "drum_and_bass.convert_xls_to_csv", "-i", self.input_path]
+        self.split_ten_invoices_per_week = ["python", "-u", "-m", "drum_and_bass.split_ten_invoices_per_week", "-i",
                                             self.input_path, "-o", self.output_path]
 
         self.time_check = None

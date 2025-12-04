@@ -15,14 +15,14 @@ class SelectParties:
         self.ten_input_path, self.ten_output_path = (f"{roots.TEN_SOURCES}/{task_name}",
                                                     f"{roots.TEN_SELECTED_PARTIES}/{task_name}")
 
-        self.aps_parameters = [ "python", "-m", "drum_and_bass.select_parties", "-i", self.aps_input_path,
+        self.aps_parameters = [ "python", "-u", "-m", "drum_and_bass.select_parties", "-i", self.aps_input_path,
                                 "--buyers-output", f"{self.aps_output_path}/APS-buyers-{month}.csv",
                                 "--suppliers-output", f"{self.aps_output_path}/APS-suppliers-{month}.csv",
                                 "-d", f"{roots.DNB_DATABASE}",
                                 "--country-map", f"{roots.COUNTRY_MAP}/country-map.csv",
                                 "-p", "APS", "--delimiter", ";" ]
 
-        self.ten_parameters = [ "python", "-m", "drum_and_bass.select_parties", "-i", self.ten_input_path,
+        self.ten_parameters = [ "python", "-u", "-m", "drum_and_bass.select_parties", "-i", self.ten_input_path,
                                 "--buyers-output", f"{self.ten_output_path}/TEN-buyers-{month}.csv",
                                 "--suppliers-output", f"{self.ten_output_path}/TEN-suppliers-{month}.csv",
                                 "-d", f"{roots.DNB_DATABASE}",
