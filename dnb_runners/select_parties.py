@@ -1,6 +1,7 @@
 import setup.setupenv_aps_ten as roots
 from instruments import prepare_parameters as preparation
 import cmd_session.cmd_runner
+from instruments.logger import logger
 
 
 
@@ -33,23 +34,43 @@ class SelectParties:
         cmd_runner = cmd_session.cmd_runner.CmdRunner()
 
         try:
+            logger.info(f"[SelectParties] Prepare APS env: create folder {self.aps_output_path}")
             cmd_runner.prepare_env("add folder", output_path=self.aps_output_path)
             aps_select_output = cmd_runner.run(self.aps_parameters)
+
         except Exception as e:
+            logger.exception(f"[SelectParties] APS step failed with exception: {e}")
             cmd_runner.kill_session()
             return -1
+
         # checkPont("select parties")
-        self.analyse_output(aps_select_output)
+        self.analyse_output(aps_select_output, label="APS")
+
 
         try:
+            logger.info(f"[SelectParties] Prepare TeN env: create folder {self.ten_output_path}")
             cmd_runner.prepare_env("add folder", output_path=self.ten_output_path)
             ten_select_output = cmd_runner.run(self.ten_parameters)
+
         except Exception as e:
+            logger.exception(f"[SelectParties] TeN step failed with exception: {e}")
             cmd_runner.kill_session()
             return -1
-        self.analyse_output(ten_select_output)
+
+        self.analyse_output(ten_select_output, label="TEN")
+        logger.info(f"[SelectParties] Finished successfully")
+        return 0
 
 
-    def analyse_output(self, output):
-        pass
+
+    def analyse_output(self, output, label):
+        if output == TimeoutError:
+            logger.error(f"[SelectParties][{label}] Timeout during execution")
+        elif output == TypeError:
+            logger.error(f"[SelectParties][{label}] Process finished with returncode -1")
+        else:
+            logger.info(f"[SelectParties][{label}] status={output['status']}, returncode={output['returncode']}")
+            if output["stderr"]:
+                logger.warning(f"[SelectParties][{label}] stderr not empty:\n{output['stderr']}")
+
 
