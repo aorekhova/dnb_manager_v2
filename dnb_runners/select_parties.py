@@ -2,6 +2,7 @@ import setup.setupenv_aps_ten as roots
 from instruments import prepare_parameters as preparation
 import cmd_session.cmd_runner
 from instruments.logger import logger
+import check_points.check_point_manager as check_points
 
 
 
@@ -9,6 +10,7 @@ from instruments.logger import logger
 
 class SelectParties:
     def __init__(self, task_name, month, env_setup="aps_ten"):
+        self.checking = check_points.CheckPoint(phase="select parties", inf="All number of read invoices:")
 
         self.aps_input_path, self.aps_output_path = (f"{roots.APS_SOURCES}/{task_name}",
                                                     f"{roots.APS_SELECTED_PARTIES}/{task_name}")
@@ -44,6 +46,7 @@ class SelectParties:
             return -1
 
         # checkPont("select parties")
+        self.checking.give_new_stat(cmd_runner.return_prepare_inf())
         self.analyse_output(aps_select_output, label="APS")
 
 

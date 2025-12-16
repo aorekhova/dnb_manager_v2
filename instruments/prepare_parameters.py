@@ -58,3 +58,20 @@ def convert_parameters(param_names, param_path, task_name, month=""):
     for name, value in zip(param_names, param_path):
         sort_parameters[name] = convert_absolute_path(value, task_name, month)
     return sort_parameters
+
+
+
+def pars_session_output(session_output, inf):
+    stdout = session_output.get("stdout", "")
+
+    pattern_before = rf"(\d+)\s+{re.escape(inf)}"
+    match_before = re.search(pattern_before, stdout)
+    if match_before:
+        return int(match_before.group(1))
+
+    pattern_after = rf"{re.escape(inf)}\s*:\s*(\d+)"
+    match_after = re.search(pattern_after, stdout)
+    if match_after:
+        return int(match_after.group(1))
+
+    return None
